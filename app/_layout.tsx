@@ -1,7 +1,11 @@
 import "~/global.css";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationContainer, Theme, ThemeProvider } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  Theme,
+  ThemeProvider,
+} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -88,6 +92,8 @@ export default function RootLayout() {
           tabBarIcon: ({ color, size }) => (
             <Compass size={size} color={color} />
           ),
+          tabBarLabel: "Home",
+          headerTitle: "Home",
         }}
       />
       <Tab.Screen
@@ -97,6 +103,8 @@ export default function RootLayout() {
           tabBarIcon: ({ color, size }) => (
             <Refrigerator size={size} color={color} />
           ),
+          tabBarLabel: "Kulkasku",
+          headerTitle: "Kulkasku",
         }}
       />
       <Tab.Screen
@@ -106,9 +114,11 @@ export default function RootLayout() {
           tabBarIcon: ({ color, size }) => (
             <UserCircle size={size} color={color} />
           ),
+          tabBarLabel: "Profile",
+          headerTitle: "Profile",
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="purchase"
         component={PurchaseScreen}
         options={{
@@ -116,7 +126,7 @@ export default function RootLayout() {
             <ReceiptText size={size} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
     // <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
     //   <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
