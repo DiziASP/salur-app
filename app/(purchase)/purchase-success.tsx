@@ -52,10 +52,10 @@ export default function PurchaseSuccessScreen() {
           <Text className="text-3xl font-bold text-white">
             Terima kasih sudah menggunakan Salur!
           </Text>
-          <Text className="text-lg font-medium text-white max-w-64">
+          {/* <Text className="text-lg font-medium text-white max-w-64">
             Mari kita lestarikan lingkungan dari limbah makanan sisa bersama
             Salur.
-          </Text>
+          </Text> */}
         </View>
       </View>
     </ScrollView>
