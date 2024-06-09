@@ -63,7 +63,25 @@ export default function PurchasePage({
   const [address, setAddress] = React.useState("Jl. Sukahaji Baru No.18");
   const [addressDetail, setAddressDetail] = React.useState("");
   const [finalQuantity, setFinalQuantity] = React.useState(quantity);
+  const [tempQuantity, setTempQuantity] = React.useState(finalQuantity);
   const [orderMethod, setOrderMethod] = React.useState("Gojek");
+  const [tempAddress, setTempAddress] = React.useState("Jl. Sukahaji Baru No.18");
+
+  const onChangeAddress = (newAddress: string) => {
+    setTempAddress(newAddress);
+  };
+
+  const onConfirmChangeAddress = () => {
+    setAddress(tempAddress);
+  };
+
+  const onChangeQuantity = (quantity: string) => {
+    setTempQuantity(Number(quantity));
+  };
+
+  const onConfirmEditItem = () => {
+    setFinalQuantity(tempQuantity);
+  };
 
   React.useEffect(() => {
     const auth = getAuth();
@@ -107,10 +125,6 @@ export default function PurchasePage({
       available: false,
     },
   ];
-
-  function onChangeAddress(text: string) {
-    setAddress(text);
-  }
 
   const originalPrice = price * finalQuantity;
   const deliveryFee =
@@ -183,23 +197,25 @@ export default function PurchasePage({
                 </DialogHeader>
                 <Input
                   placeholder={address}
-                  value={address}
+                  value={tempAddress}
                   style={{
-                    // width: "90%",
-                    // borderWidth: 0,
                     fontSize: 14,
                     overflow: "scroll",
-                    // fontWeight: "600",
-                    // padding: 0,
-                    // maxHeight: 25,
                   }}
                   onChangeText={onChangeAddress}
                 />
-                <DialogClose asChild>
-                  <Button className="rounded-full bg-[#D92F2F]">
-                    <Text className="text-white font-bold">Simpan</Text>
-                  </Button>
-                </DialogClose>
+                <View className="flex flex-row justify-end gap-2 mt-4">
+                  <DialogClose asChild>
+                    <Button className="rounded-full bg-[#D92F2F]">
+                      <Text className="text-white font-bold">Batal</Text>
+                    </Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button className="rounded-full bg-[#D92F2F]" onPress={onConfirmChangeAddress}>
+                      <Text className="text-white font-bold">Konfirmasi</Text>
+                    </Button>
+                  </DialogClose>
+                </View>
               </DialogContent>
             </Dialog>
           </View>
@@ -345,40 +361,41 @@ export default function PurchasePage({
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </Text>
               <View className="flex flex-row gap-2 items-center justify-end">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Text className="text-turquoise-700 text-sm">
-                      Edit Item
-                    </Text>
-                  </DialogTrigger>
-                  <DialogContent className="w-[90vw]">
-                    <DialogHeader>
-                      <DialogTitle className="font-bold">Edit Item</DialogTitle>
-                      <DialogDescription>Ubah jumlah item</DialogDescription>
-                    </DialogHeader>
-                    <Input
-                      placeholder={String(finalQuantity)}
-                      onChangeText={(e) => {
-                        setFinalQuantity(Number(e));
-                        // Use the updatedQuantity variable for further processing
-                      }}
-                      style={{
-                        // width: "90%",
-                        // borderWidth: 0,
-                        fontSize: 14,
-                        overflow: "scroll",
-                        // fontWeight: "600",
-                        // padding: 0,
-                        // maxHeight: 25,
-                      }}
-                    />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Text className="text-turquoise-700 text-sm">
+                    Edit Item
+                  </Text>
+                </DialogTrigger>
+                <DialogContent className="w-[90vw]">
+                  <DialogHeader>
+                    <DialogTitle className="font-bold">Edit Item</DialogTitle>
+                    <DialogDescription>Ubah jumlah item</DialogDescription>
+                  </DialogHeader>
+                  <Input
+                    keyboardType="numeric"
+                    placeholder={String(finalQuantity)}
+                    value={String(tempQuantity)}
+                    onChangeText={onChangeQuantity}
+                    style={{
+                      fontSize: 14,
+                      overflow: "scroll",
+                    }}
+                  />
+                  <View className="flex flex-row justify-end gap-2 mt-4">
                     <DialogClose asChild>
                       <Button className="rounded-full bg-[#D92F2F]">
-                        <Text className="text-white font-bold">Simpan</Text>
+                        <Text className="text-white font-bold">Batal</Text>
                       </Button>
                     </DialogClose>
-                  </DialogContent>
-                </Dialog>
+                    <DialogClose asChild>
+                      <Button className="rounded-full bg-[#D92F2F]" onPress={onConfirmEditItem}>
+                        <Text className="text-white font-bold">Konfirmasi</Text>
+                      </Button>
+                    </DialogClose>
+                  </View>
+                </DialogContent>
+              </Dialog>
               </View>
             </View>
           </View>

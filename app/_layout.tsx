@@ -344,7 +344,7 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack.Navigator initialRouteName="auth/login">
+      <Stack.Navigator initialRouteName="index">
         <Stack.Screen
           name="index"
           component={RootTabs}

@@ -59,8 +59,7 @@ export default function RefrigeratorScreen() {
       ) : (
         <View className="flex-1 items-center justify-center">
           <Text className="text-center text-lg font-bold">
-            Silakan login untuk menampilkan estimasi tanggal kadaluwarasa
-            makanan yang kamu miliki
+            Anda harus login terlebih dahulu untuk mengakses fitur Kulkasku
           </Text>
           <Button
             className="mt-4 bg-blue-400"
